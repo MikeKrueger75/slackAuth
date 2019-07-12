@@ -2,17 +2,10 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
-    return 'Hello Mike!'
+def install():
+    return render_template('install.html')
 
-@app.route('/form')
-def form():
-    return render_template('form.html', name="Mike")
-
-@app.route('/result', methods=['get', 'post'])
-def result():
-    firstname = request.form['firstname']
-    lastname = request.form['lastname']
-    gender = request.form['gender']
-
-    return "Thank you " + firstname + " " + lastname + " ("+ gender +")!"
+@app.route('/grant')
+def token():
+    code = request.form['code']
+    return "Authorization Grant=" + code
