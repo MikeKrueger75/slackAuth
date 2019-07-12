@@ -6,7 +6,7 @@ def install():
     return render_template('install.html')
 
 @app.route('/grant')
-def token():
+def code():
     code = request.args['code']
     return "Authorization Grant=" + code
 
