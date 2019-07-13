@@ -19,16 +19,20 @@ def code():
     # Todo: Access-Token speichern
 
     # User identifizieren
-    url = 'https://slack.com/api/auth.test?token=' + accessToken
-    r = requests.get(url)
-    user = json.loads(r.text)['user_id']
-
-    # User-Profile anpassen - Status setzen
     header = headers = {
-            'Authorization': 'Bearer '+accessToken
-        }
+        'Authorization': 'Bearer ' + accessToken
+    }
     url = 'https://slack.com/api/auth.test'
-    r = requests.get(url, headers = header)
+    r = requests.get(url, headers=header)
     user = json.loads(r.text)['user_id']
 
-    return user
+    # User-Profile Status setzen
+    header = headers = {
+            'authorization': 'Bearer '+accessToken
+        }
+    url = 'https://slack.com/api/users.profile.set'
+    params = {'user': user, 'name' : 'status_text', 'value' : 'Slack-App was here'}
+    r = requests.post(url=  url,params =params, headers = header)
+
+    result = json.loads(r.text)['ok']
+    return result
