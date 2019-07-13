@@ -29,6 +29,7 @@ def code():
     # User-Profile Status setzen
     header = headers = {
             'authorization': 'Bearer '+accessToken
+            'content-type' : 'application/json'
         }
     url = 'https://slack.com/api/users.profile.set'
     params = {'user': user,
@@ -36,6 +37,7 @@ def code():
                     'status_text':'Kränkelich',
                     'status_emoji': ':face_with_thermometer:'
               }}
-    r = requests.post(url = url, data = json.dumps(params), headers = header)
 
-    return 'Ready...'
+    r = requests.post(url = url, params = json.dumps(params), headers = header)
+
+    return json.dumps(params)
