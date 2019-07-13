@@ -10,10 +10,25 @@ def install():
 
 @app.route('/grant')
 def code():
+    # Access-Token holen
     code = request.args['code']
     url = 'https://slack.com/api/oauth.access?client_id=14917766709.693327534246&client_secret=f844dde28cb3bad0f7f2b11f160455c7&code='+ code + '&redirect_uri=https://slack-auth.herokuapp.com/grant'
     r = requests.get(url)
     rjson = json.loads(r.text)
     accessToken = rjson['access_token']
+    # Todo: Access-Token speichern
 
-    return accessToken
+    # User identifizieren
+    url = 'https://slack.com/api/auth.test?token=' + accessToken
+    r = requests.get(url)
+    user = json.loads(r.text)['user_id']
+
+    # User-Profile anpassen - Status setzen
+    header = headers = {
+            'Authorization': 'Bearer '+accessToken
+        }
+    url = 'https://slack.com/api/auth.test'
+    r = requests.get(url, header = header)
+    user = json.loads(r.text)['user_id']
+
+    return user
