@@ -28,17 +28,17 @@ def code():
 
     # User-Profile Status setzen
     header = headers = {
-            'authorization': 'Bearer '+accessToken,
-            'content-type' : 'application/json'
+            'Authorization': 'Bearer '+accessToken,
+            'Content-type' : 'application/json; charset=utf-8'
         }
     url = 'https://slack.com/api/users.profile.set'
-    params = {
+    payload = {
     "profile": {
         "status_text": "riding a train",
         "status_emoji": ":mountain_railway:"
     }
 }
 
-    r = requests.post(url = url, params = json.dumps(params), headers = header)
+    r = requests.post(url = url, json = json.dumps(payload), headers = header)
 
-    return json.dumps(params)
+    return json.dumps(payload)
