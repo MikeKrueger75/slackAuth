@@ -34,5 +34,4 @@ def code():
     params = {'user': user, 'name' : 'status_text', 'value' : 'Slack-App was here'}
     r = requests.post(url=  url,params =params, headers = header)
 
-    result = json.loads(r.text)['ok']
-    return result
+    return 'Ready...'
