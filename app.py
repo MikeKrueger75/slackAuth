@@ -32,13 +32,12 @@ def code():
             'Content-type' : 'application/json; charset=utf-8'
         }
     url = 'https://slack.com/api/users.profile.set'
-    payload = {
-    "profile": {
-        "status_text": "riding a train",
-        "status_emoji": ":mountain_railway:"
+    data = {
+        "profile": {
+            "status_text": "riding a train",
+            "status_emoji": ":mountain_railway:"
+        }
     }
-}
+    r = requests.post(url = url, data = json.dumps(data), headers = header)
 
-    r = requests.post(url = url, data = json.dumps(payload), headers = header)
-
-    return json.dumps(payload) + '<p>' + r.text
+    return "Ready..."
