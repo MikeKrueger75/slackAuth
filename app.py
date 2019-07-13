@@ -34,7 +34,7 @@ def code():
     url = 'https://slack.com/api/users.profile.set'
     params = {'user': user,
               'profile' : {
-                    'status_text':'Kränkelich',
+                    'status_text':'Krankelich',
                     'status_emoji': ':face_with_thermometer:'
               }}
 
