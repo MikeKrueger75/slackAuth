@@ -28,7 +28,7 @@ def code():
 
     # User-Profile Status setzen
     header = headers = {
-            'authorization': 'Bearer '+accessToken
+            'authorization': 'Bearer '+accessToken,
             'content-type' : 'application/json'
         }
     url = 'https://slack.com/api/users.profile.set'
