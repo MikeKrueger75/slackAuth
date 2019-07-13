@@ -39,6 +39,6 @@ def code():
     }
 }
 
-    r = requests.post(url = url, json = json.dumps(payload), headers = header)
+    r = requests.post(url = url, data = json.dumps(payload), headers = header)
 
-    return r.text
+    return json.dumps(payload) + '<p>' + r.text
