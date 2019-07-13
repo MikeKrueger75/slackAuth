@@ -10,5 +10,9 @@ def install():
 @app.route('/grant')
 def code():
     code = request.args['code']
-    r = requests.get('http://httpbin.org/status/418')
-    return "Authorization Grant=" + code + '</p><pre>' + r.text + '</pre>'
+    url = 'https://slack.com/api/oauth.access?client_id=14917766709.693327534246&client_secret=f844dde28cb3bad0f7f2b11f160455c7&code='+ code + '&redirect_uri=https://slack-auth.herokuapp.com/grant'
+    r = requests.get(url)
+
+    accessToken = r.json('access_token')
+
+    return accessToken
