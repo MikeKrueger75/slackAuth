@@ -41,4 +41,4 @@ def code():
 
     r = requests.post(url = url, json = json.dumps(payload), headers = header)
 
-    return json.dumps(payload)
+    return r.text
