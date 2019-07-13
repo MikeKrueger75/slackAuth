@@ -10,7 +10,5 @@ def install():
 @app.route('/grant')
 def code():
     code = request.args['code']
-
     r = requests.get('http://httpbin.org/status/418')
-    print(r.text)
     return HttpResponse("Authorization Grant=" + code + '</p><pre>' + r.text + '</pre>')
