@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request
+import requests
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -8,11 +10,7 @@ def install():
 @app.route('/grant')
 def code():
     code = request.args['code']
-    return "Authorization Grant=" + code
 
-@app.route('/token')
-def token():
-    data = request.data
-    dataDict = json.loads(data)
-    token = dataDict['access_token']
-    return token
+    r = requests.get('http://httpbin.org/status/418')
+    print(r.text)
+    return HttpResponse("Authorization Grant=" + code + '</p><pre>' + r.text + '</pre>')
