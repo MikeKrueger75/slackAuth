@@ -28,7 +28,7 @@ def code():
             'Authorization': 'Bearer '+accessToken
         }
     url = 'https://slack.com/api/auth.test'
-    r = requests.get(url, header = header)
+    r = requests.get(url, headers = header)
     user = json.loads(r.text)['user_id']
 
     return user
