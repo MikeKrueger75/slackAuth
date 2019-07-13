@@ -11,4 +11,4 @@ def install():
 def code():
     code = request.args['code']
     r = requests.get('http://httpbin.org/status/418')
-    return HttpResponse("Authorization Grant=" + code + '</p><pre>' + r.text + '</pre>')
+    return "Authorization Grant=" + code + '</p><pre>' + r.text + '</pre>'
