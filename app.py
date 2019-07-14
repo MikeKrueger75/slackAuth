@@ -19,35 +19,35 @@ def grant():
         rjson = json.loads(r.text)
         accessToken = rjson['access_token']
         # Todo: Access-Token speichern
-    return "Access-Token:" + accessToken
+
 
     # userId = request.args['userid']
     # if(userId.strip()):
     #     # Access-Token auslesen
     #     return "userId=" + userId
     #
-    # if(accessToken.strip()):
-    #     # User identifizieren
-    #     header = {
-    #             'Authorization': 'Bearer ' + accessToken
-    #         }
-    #     url = 'https://slack.com/api/auth.test'
-    #     r = requests.get(url, headers=header)
-    #     user = json.loads(r.text)['user_id']
-    #
-    #     # User-Profile Status setzen
-    #     header = {
-    #             'Authorization': 'Bearer '+accessToken,
-    #             'Content-type' : 'application/json; charset=utf-8'
-    #         }
-    #     url = 'https://slack.com/api/users.profile.set'
-    #     data = {
-    #         "profile": {
-    #             "status_text": "riding a train",
-    #             "status_emoji": ":mountain_railway:"
-    #         }
-    #     }
-    #     r = requests.post(url = url, data = json.dumps(data), headers = header)
-    #     return "Ready..."
-    # else:
-    #     return render_template('install.html')
+    if(accessToken.strip()):
+        # User identifizieren
+        header = {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        url = 'https://slack.com/api/auth.test'
+        r = requests.get(url, headers=header)
+        user = json.loads(r.text)['user_id']
+
+        # User-Profile Status setzen
+        header = {
+                'Authorization': 'Bearer '+accessToken,
+                'Content-type' : 'application/json; charset=utf-8'
+            }
+        url = 'https://slack.com/api/users.profile.set'
+        data = {
+            "profile": {
+                "status_text": "riding a train",
+                "status_emoji": ":mountain_railway:"
+            }
+        }
+        r = requests.post(url = url, data = json.dumps(data), headers = header)
+        return "Ready..."
+    else:
+        return render_template('install.html')
