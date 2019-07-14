@@ -9,21 +9,21 @@ def install():
     return render_template('install.html')
 
 @app.route('/grant')
-def setState():
+def grant():
 
     code = request.args['code']
-    if(code > ""):
-        # Access-Token holen
-        url = 'https://slack.com/api/oauth.access?client_id=14917766709.693327534246&client_secret=f844dde28cb3bad0f7f2b11f160455c7&code='+ code + '&redirect_uri=https://slack-auth.herokuapp.com/grant'
-        r = requests.get(url)
-        rjson = json.loads(r.text)
-        accessToken = rjson['access_token']
-        # Todo: Access-Token speichern
+    #if(code > ""):
+    # Access-Token holen
+    url = 'https://slack.com/api/oauth.access?client_id=14917766709.693327534246&client_secret=f844dde28cb3bad0f7f2b11f160455c7&code='+ code + '&redirect_uri=https://slack-auth.herokuapp.com/grant'
+    r = requests.get(url)
+    rjson = json.loads(r.text)
+    accessToken = rjson['access_token']
+    # Todo: Access-Token speichern
 
-    userId = request.args['userid']
-    if(userId > ""):
-        # Access-Token auslesen
-        return "userId=" + userId
+    # userId = request.args['userid']
+    # if(userId > ""):
+    #     # Access-Token auslesen
+    #     return "userId=" + userId
 
     #if(accessToken > ""):
     # User identifizieren
