@@ -20,12 +20,11 @@ def grant():
         accessToken = rjson['access_token']
         # Todo: Access-Token speichern
 
-
-    # userId = request.args['userid']
+    userId = request.args['userid']
     # if(userId.strip()):
     #     # Access-Token auslesen
     #     return "userId=" + userId
-    #
+
     if(accessToken.strip()):
         # User identifizieren
         header = {
