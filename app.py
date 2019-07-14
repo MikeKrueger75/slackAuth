@@ -25,30 +25,30 @@ def setState():
         # Access-Token auslesen
         return "userId=" + userId
 
-    if(accessToken > ""):
-        # User identifizieren
-        header = headers = {
-            'Authorization': 'Bearer ' + accessToken
+    #if(accessToken > ""):
+    # User identifizieren
+    header = headers = {
+        'Authorization': 'Bearer ' + accessToken
+    }
+    url = 'https://slack.com/api/auth.test'
+    r = requests.get(url, headers=header)
+    user = json.loads(r.text)['user_id']
+
+
+
+
+    # User-Profile Status setzen
+    header = headers = {
+            'Authorization': 'Bearer '+accessToken,
+            'Content-type' : 'application/json; charset=utf-8'
         }
-        url = 'https://slack.com/api/auth.test'
-        r = requests.get(url, headers=header)
-        user = json.loads(r.text)['user_id']
-
-
-
-
-        # User-Profile Status setzen
-        header = headers = {
-                'Authorization': 'Bearer '+accessToken,
-                'Content-type' : 'application/json; charset=utf-8'
-            }
-        url = 'https://slack.com/api/users.profile.set'
-        data = {
-            "profile": {
-                "status_text": "riding a train",
-                "status_emoji": ":mountain_railway:"
-            }
+    url = 'https://slack.com/api/users.profile.set'
+    data = {
+        "profile": {
+            "status_text": "riding a train",
+            "status_emoji": ":mountain_railway:"
         }
-        r = requests.post(url = url, data = json.dumps(data), headers = header)
-    else:
-        return render_template('install.html')
+    }
+    r = requests.post(url = url, data = json.dumps(data), headers = header)
+    #else:
+    #    return render_template('install.html')
