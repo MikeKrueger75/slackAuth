@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import requests
 import json
+import pickle
 
 app = Flask(__name__)
 
@@ -10,6 +11,8 @@ def install():
 
 @app.route('/grant')
 def grant():
+    #f = file("tokens.bin", "rb")
+    #accessTokens = pickle.load(f)
 
     code = request.args['code']
     if(code.strip()):
@@ -20,7 +23,16 @@ def grant():
         accessToken = rjson['access_token']
         # Todo: Access-Token speichern
 
-    userId = request.args['userid']
+    userId=accessToken[-10:]
+
+    print(userId)
+    print(accessToken)
+    data={userId : accessToken}
+    print(data)
+    #pickle.dump(accessTokens.update(data), f)
+    #f.close()
+
+    # userId = request.args['userid']
     # if(userId.strip()):
     #     # Access-Token auslesen
     #     return "userId=" + userId
