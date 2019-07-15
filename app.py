@@ -13,7 +13,7 @@ def install():
 def grant():
     #Access-Tokens Lesen
     accessTokens = {}
-    action = ""
+    action="geladen: "
     userId = request.args.get('userid')
 
     code = request.args.get('code')
@@ -37,8 +37,6 @@ def grant():
         action="neu: "
 
     if(userId):
-        action="geladen: "
-
         # Access-Token auslesen
         try:
             with open("data.bin", "rb") as f:
