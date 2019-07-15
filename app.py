@@ -21,7 +21,7 @@ def grant():
         print("Datei data.bin nicht gefunden.")
 
     code = request.args['code']
-    if(code.strip()):
+    if(code):
         # Access-Token holen
         url = 'https://slack.com/api/oauth.access?client_id=14917766709.693327534246&client_secret=f844dde28cb3bad0f7f2b11f160455c7&code='+ code + '&redirect_uri=https://slack-auth.herokuapp.com/grant'
         r = requests.get(url)
@@ -29,21 +29,21 @@ def grant():
         accessToken = rjson['access_token']
         # Todo: Access-Token speichern
 
-    userId=accessToken[-10:]
+        userId = accessToken[-20:]
+        data = {userId: accessToken}
+        accessTokens.update(data)
 
-    data={userId : accessToken}
-
-    # Speichern
-    f = open("data.bin", "wb")
-    pickle.dump(accessTokens.update(data), f)
-    f.close()
+        # Speichern
+        f = open("data.bin", "wb")
+        pickle.dump(accessTokens, f)
+        f.close()
 
     # userId = request.args['userid']
     # if(userId.strip()):
     #     # Access-Token auslesen
     #     return "userId=" + userId
 
-    if(accessToken.strip()):
+    if(accessToken):
         # User identifizieren
         header = {
                 'Authorization': 'Bearer ' + accessToken
@@ -65,6 +65,6 @@ def grant():
             }
         }
         r = requests.post(url = url, data = json.dumps(data), headers = header)
-        return data
+        return accessToken
     else:
         return render_template('install.html')
