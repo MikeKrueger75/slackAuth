@@ -13,6 +13,8 @@ def install():
 def grant():
     #Access-Tokens Lesen
     accessTokens = {}
+    action = ""
+    userId = request.args.get('userid')
 
     code = request.args.get('code')
     if(code):
@@ -34,9 +36,9 @@ def grant():
 
         action="neu: "
 
-    userId = request.args.get('userid')
     if(userId):
         action="geladen: "
+
         # Access-Token auslesen
         try:
             with open("data.bin", "rb") as f:
@@ -69,6 +71,6 @@ def grant():
             }
         }
         r = requests.post(url = url, data = json.dumps(data), headers = header)
-        return "<a href=https://slack-auth.herokuapp.com/grant?userid=" + str(userId) + ">https://slack-auth.herokuapp.com/grant?userid=" + str(userId) + "</a>"
+        return action + "<a href=https://slack-auth.herokuapp.com/grant?userid=" + userId + ">https://slack-auth.herokuapp.com/grant?userid=" + userId + "</a>"
     else:
         return render_template('install.html')
