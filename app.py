@@ -11,7 +11,11 @@ def install():
 
 @app.route('/grant')
 def grant():
-    #f = file("tokens.bin", "rb")
+
+    # Lesen
+    f = open("data.bin", "rb")
+    accessTokens = pickle.load(f)
+    f.close()
     #accessTokens = pickle.load(f)
 
     code = request.args['code']
@@ -25,12 +29,12 @@ def grant():
 
     userId=accessToken[-10:]
 
-    print(userId)
-    print(accessToken)
     data={userId : accessToken}
-    print(data)
-    #pickle.dump(accessTokens.update(data), f)
-    #f.close()
+
+    # Speichern
+    f = open("data.bin", "wb")
+    pickle.dump(accessTokens.update(data), f)
+    f.close()
 
     # userId = request.args['userid']
     # if(userId.strip()):
