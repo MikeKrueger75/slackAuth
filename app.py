@@ -12,11 +12,13 @@ def install():
 @app.route('/grant')
 def grant():
 
-    # Lesen
-    f = open("data.bin", "rb")
-    accessTokens = pickle.load(f)
-    f.close()
-    #accessTokens = pickle.load(f)
+    #Access-Tokens Lesen
+    try:
+        with open("data.bin", "rb") as f:
+        accessTokens = pickle.load(f)
+        f.close()
+    except:
+        print("Datei data.bin nicht gefunden.")
 
     code = request.args['code']
     if(code.strip()):
