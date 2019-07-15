@@ -16,11 +16,9 @@ def grant():
     try:
         with open("data.bin", "rb") as f:
             accessTokens = pickle.load(f)
-
+            f.close()
     except:
         print("Datei data.bin nicht gefunden.")
-    finally:
-        f.close()
 
     code = request.args['code']
     if(code.strip()):
