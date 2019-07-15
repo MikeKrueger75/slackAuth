@@ -11,8 +11,8 @@ def install():
 
 @app.route('/grant')
 def grant():
-
     #Access-Tokens Lesen
+    accessTokens = {}
     try:
         with open("data.bin", "rb") as f:
             accessTokens = pickle.load(f)
