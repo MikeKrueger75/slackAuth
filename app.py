@@ -86,7 +86,7 @@ def setstate():
         data = {
             "profile": {
                 "status_text": request.args.get('status_text'),
-                "status_emoji": ":mountain_railway:"
+                "status_emoji": request.args.get('status_emoji')
             }
         }
         r = requests.post(url=url, data=json.dumps(data), headers=header)
