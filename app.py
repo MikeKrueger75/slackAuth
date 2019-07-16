@@ -57,23 +57,39 @@ def grant():
         user = json.loads(r.text)['user_id']
         username = json.loads(r.text)['user']
 
-        # User-Profile Status setzen
-        header = {
-                'Authorization': 'Bearer '+accessToken,
-                'Content-type' : 'application/json; charset=utf-8'
-            }
-        url = 'https://slack.com/api/users.profile.set'
-        data = {
-            "profile": {
-                "status_text": "riding a train",
-                "status_emoji": ":mountain_railway:"
-            }
-        }
-        r = requests.post(url = url, data = json.dumps(data), headers = header)
+
         return render_template('install_ready.html', userId=userId, user=user)
     else:
         return render_template('install.html')
 
 @app.route('/setstate')
 def setstate():
-    return "Status gesetzt"
+    userId = request.args.get('userid')
+
+    if (userId):
+        # Access-Token auslesen
+        try:
+            with open("data.bin", "rb") as f:
+                accessTokens = pickle.load(f)
+                f.close()
+                accessToken = accessTokens[userId]
+        except:
+            print("FEHLER: Datei data.bin nicht gefunden.")
+
+    if (accessToken):
+        # User-Profile Status setzen
+        header = {
+            'Authorization': 'Bearer ' + accessToken,
+            'Content-type': 'application/json; charset=utf-8'
+        }
+        url = 'https://slack.com/api/users.profile.set'
+        data = {
+            "profile": {
+                "status_text": "Mike was here",
+                "status_emoji": ":mountain_railway:"
+            }
+        }
+        r = requests.post(url=url, data=json.dumps(data), headers=header)
+        return "Status gesetzt"
+    else:
+        return "FEHLER: Es konnte kein Access_Token ermittelt werden."
