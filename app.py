@@ -90,6 +90,6 @@ def setstate():
             }
         }
         r = requests.post(url=url, data=json.dumps(data), headers=header)
-        return data
+        return str(data)
     else:
         return "FEHLER: Es konnte kein Access_Token ermittelt werden."
