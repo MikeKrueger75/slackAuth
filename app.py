@@ -58,7 +58,7 @@ def grant():
         username = json.loads(r.text)['user']
 
 
-        return render_template('install_ready.html', userId=userId, user=user)
+        return render_template('install_ready.html', userId=userId, username=username)
     else:
         return render_template('install.html')
 
