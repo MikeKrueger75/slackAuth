@@ -85,7 +85,7 @@ def setstate():
         url = 'https://slack.com/api/users.profile.set'
         data = {
             "profile": {
-                "status_text": "Yippie",
+                "status_text": request.args.get('status_text'),
                 "status_emoji": ":mountain_railway:"
             }
         }
