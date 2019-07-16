@@ -55,6 +55,7 @@ def grant():
         url = 'https://slack.com/api/auth.test'
         r = requests.get(url, headers=header)
         user = json.loads(r.text)['user_id']
+        username = json.loads(r.text)['user']
 
         # User-Profile Status setzen
         header = {
@@ -69,6 +70,10 @@ def grant():
             }
         }
         r = requests.post(url = url, data = json.dumps(data), headers = header)
-        return render_template('install_ready.html', userId=userId)
+        return render_template('install_ready.html', userId=userId, user=user)
     else:
         return render_template('install.html')
+
+@app.route('/setstate')
+def setstate():
+    return "Status gesetzt"
