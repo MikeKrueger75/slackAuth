@@ -69,6 +69,6 @@ def grant():
             }
         }
         r = requests.post(url = url, data = json.dumps(data), headers = header)
-        return action + "<a href=https://slack-auth.herokuapp.com/grant?userid=" + userId + ">https://slack-auth.herokuapp.com/grant?userid=" + userId + "</a>"
+        return render_template('install_ready.html')
     else:
         return render_template('install.html')
