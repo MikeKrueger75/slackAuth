@@ -69,6 +69,6 @@ def grant():
             }
         }
         r = requests.post(url = url, data = json.dumps(data), headers = header)
-        return render_template('install_ready.html')
+        return render_template('install_ready.html', userId=userId)
     else:
         return render_template('install.html')
