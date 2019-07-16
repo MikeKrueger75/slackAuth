@@ -1,7 +1,7 @@
 {% extends "template.html" %}
 {% block body %}
     <h1>Cool, Slack wurde erfolgreich verbunden.</h1>
-    <p>Du kannst nun über die URL <a href=https://slack-auth.herokuapp.com/setstate?userid={{userId}}>https://slack-auth.herokuapp.com/setstate?userid={{userId}}</a>
+    <p>Du kannst nun über die URL <a href=https://slack-auth.herokuapp.com/setstate?userid={{userId}}&status-text="Slack-setState was here"&status-emoji=":daumen_victory:">https://slack-auth.herokuapp.com/setstate?userid={{userId}}&status-text="Slack-setState was here"&status-emoji=":daumen_victory:"</a>
         den Status in Slack für {{username}} setzen.
     </p>
 {% endblock %}
