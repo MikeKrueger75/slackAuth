@@ -55,7 +55,7 @@ def grant():
             r = requests.get(url, headers=header)
             username = json.loads(r.text)['user']
 
-            if(install):
+            if(install = "true"):
                 return render_template('tryout.html',
                                        msg_type="success",
                                        msg_text="Slack wurde für "+username+" verbunden.",
