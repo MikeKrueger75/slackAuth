@@ -13,7 +13,7 @@ def install():
 def grant():
     #Access-Tokens Lesen
     accessTokens = {}
-    action="geladen: "
+    install = "false"
     userId = request.args.get('userid')
 
     code = request.args.get('code')
@@ -33,8 +33,6 @@ def grant():
         pickle.dump(accessTokens, f)
         f.close()
         install = "true"
-    else:
-        install = "false"
 
     if(userId):
         # Access-Token auslesen
