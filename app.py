@@ -102,6 +102,10 @@ def setstate():
                 }
             }
             r = requests.post(url=url, data=json.dumps(data), headers=header)
+
+
+            #Todo: API Response auf Fehler prüfen
+
             return render_template('tryout.html',
                                    msg_type="success",
                                    msg_text="Der Status wurde erfolgreich gesetzt.",

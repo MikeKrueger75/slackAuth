@@ -7,7 +7,7 @@
     {% endif %}
 
     <form action="/setstate" method="get">
-     https://slack-auth.herokuapp.com/setState?<br>
+     https://slack-auth.herokuapp.com/setstate?<br>
         <table>
             <tr>
                 <td>
@@ -22,7 +22,7 @@
                     status_text=
                 </td>
                 <td>
-                    <input type="text" name="status_text" value="Im Meeting">
+                    <input type="text" name="status_text" value={{status_text}}>
                 </td>
             </tr>
             <tr>
@@ -30,14 +30,18 @@
                     status_emoji=
                 </td>
                 <td>
-                    <input type="text" name="status_emoji" value="">
+                    <input type="text" name="status_emoji" value={{status_emoji}}>
                 </td>
             </tr>
-        </table>
-     <br>
-     <br>
+            <tr>
+                <td>
+                    <input type="submit" value="Status setzen">
+                </td>
+                <td>
+                </td>
+            </tr>
 
-     <input type="submit" value="Status setzen">
+        </table>
    </form>
     <a href=https://slack-auth.herokuapp.com/setstate?userid={{userId}}&status_text=Happy&status_emoji=:smile:>https://slack-auth.herokuapp.com/setstate?userid={{userId}}&status_text=Happy&status_emoji=:smile:</a>
 {% endblock %}
