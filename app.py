@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def install():
-    return render_template('install.html', error = "none", error_text="")
+    return render_template('install.html', error="none", error_text="")
 
 @app.route('/grant')
 def grant():
