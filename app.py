@@ -32,7 +32,7 @@ def grant():
         f = open("data.bin", "wb")
         pickle.dump(accessTokens, f)
         f.close()
-        install = true
+        install = "true"
 
     if(userId):
         # Access-Token auslesen
