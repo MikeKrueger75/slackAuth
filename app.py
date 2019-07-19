@@ -23,7 +23,6 @@ def grant():
         r = requests.get(url)
         rjson = json.loads(r.text)
         accessToken = rjson['access_token']
-        # Todo: Access-Token speichern
 
         userId = accessToken[-20:]
         data = {userId: accessToken}
@@ -42,7 +41,7 @@ def grant():
                 f.close()
                 accessToken = accessTokens[userId]
         except:
-            return render_template('install.html', error="true", error_text="(Database not found-1)")
+            return render_template('install.html', error="true", error_text="(could not load access-token-1)")
 
         if(accessToken):
             # User identifizieren
@@ -54,7 +53,7 @@ def grant():
             username = json.loads(r.text)['user']
 
 
-            return render_template('tryout.html', install_success="true", username=username, userId=userId)
+            return render_template('tryout.html', success="true", success_msg="Slack wurde für "+username+" verbunden.", userId=userId)
         else:
             return render_template('install.html', error="true", error_text="(no access-token-1)")
     else:
@@ -71,8 +70,8 @@ def setstate():
                 accessTokens = pickle.load(f)
                 f.close()
                 accessToken = accessTokens[userId]
-        except Exception as e:
-            return render_template('install.html', error="true", error_text="(Database not found-2) "+str(e))
+        except:
+            return render_template('install.html', error="true", error_text="(could not load access-token-2)")
 
         if (accessToken):
             # User-Profile Status setzen
@@ -88,7 +87,7 @@ def setstate():
                 }
             }
             r = requests.post(url=url, data=json.dumps(data), headers=header)
-            return accessToken + "</p> "+ r.text
+            return render_template('tryout.html', msg_type="success", msg_text="Der Status wurde erfolgreich gesetzt.", username=username, userId=userId)
         else:
             return render_template('install.html', error="true", error_text="(no access-token-2)")
     else:
