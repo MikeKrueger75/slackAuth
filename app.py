@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def install():
-    return render_template('install.html', error = "none")
+    return render_template('install.html', error = "none", error_text="")
 
 @app.route('/grant')
 def grant():
@@ -34,8 +34,6 @@ def grant():
         pickle.dump(accessTokens, f)
         f.close()
 
-        action="neu: "
-
     if(userId):
         # Access-Token auslesen
         try:
@@ -44,23 +42,24 @@ def grant():
                 f.close()
                 accessToken = accessTokens[userId]
         except:
-            print("Datei data.bin nicht gefunden.")
+            return render_template('install.html', error="true")
+
+        if(accessToken):
+            # User identifizieren
+            header = {
+                    'Authorization': 'Bearer ' + accessToken
+                }
+            url = 'https://slack.com/api/auth.test'
+            r = requests.get(url, headers=header)
+            user = json.loads(r.text)['user_id']
+            username = json.loads(r.text)['user']
 
 
-    if(accessToken):
-        # User identifizieren
-        header = {
-                'Authorization': 'Bearer ' + accessToken
-            }
-        url = 'https://slack.com/api/auth.test'
-        r = requests.get(url, headers=header)
-        user = json.loads(r.text)['user_id']
-        username = json.loads(r.text)['user']
-
-
-        return render_template('tryout.html', install_success="true", username=username, userId=user)
+            return render_template('tryout.html', install_success="true", username=username, userId=user)
+        else:
+            return render_template('install.html', error="true", error_text="(no access-token-1)")
     else:
-        return render_template('install.html', error="true")
+        return render_template('install.html', error="true", error_text="(no user-id-1))
 
 @app.route('/setstate')
 def setstate():
@@ -92,6 +91,6 @@ def setstate():
             r = requests.post(url=url, data=json.dumps(data), headers=header)
             return accessToken + "</p> "+ r.text
         else:
-            return render_template('install.html', error="true")
+            return render_template('install.html', error="true", error_text="(no access-token-2)")
     else:
-        return render_template('install.html', error="true")
+        return render_template('install.html', error="true", error_text="(no user-id-2)")
