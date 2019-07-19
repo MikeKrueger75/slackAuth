@@ -32,6 +32,7 @@ def grant():
         f = open("data.bin", "wb")
         pickle.dump(accessTokens, f)
         f.close()
+        install = true
 
     if(userId):
         # Access-Token auslesen
@@ -52,8 +53,19 @@ def grant():
             r = requests.get(url, headers=header)
             username = json.loads(r.text)['user']
 
-
-            return render_template('tryout.html', msg_type="success", msg_text="Slack wurde für "+username+" verbunden.", userId=userId)
+            if(install):
+                return render_template('tryout.html',
+                                       msg_type="success",
+                                       msg_text="Slack wurde für "+username+" verbunden.",
+                                       userId=userId,
+                                       status_text="Im Urlaub",
+                                       status_emoji=":smile:")
+            else
+                return render_template('tryout.html', msg_type="none",
+                                       msg_text="",
+                                       userId=userId,
+                                       status_text="Im Urlaub",
+                                       status_emoji=":smile:")
         else:
             return render_template('install.html', error="true", error_text="(no access-token-1)")
     else:
@@ -75,6 +87,9 @@ def setstate():
 
         if (accessToken):
             # User-Profile Status setzen
+            status_text = request.args.get('status_text')
+            status_emoji = request.args.get('status_emoji')
+
             header = {
                 'Authorization': 'Bearer ' + accessToken,
                 'Content-type': 'application/json; charset=utf-8'
@@ -82,12 +97,17 @@ def setstate():
             url = 'https://slack.com/api/users.profile.set'
             data = {
                 "profile": {
-                    "status_text": request.args.get('status_text'),
-                    "status_emoji": request.args.get('status_emoji')
+                    "status_text": status_text,
+                    "status_emoji": status_emoji
                 }
             }
             r = requests.post(url=url, data=json.dumps(data), headers=header)
-            return render_template('tryout.html', msg_type="success", msg_text="Der Status wurde erfolgreich gesetzt.", userId=userId)
+            return render_template('tryout.html',
+                                   msg_type="success",
+                                   msg_text="Der Status wurde erfolgreich gesetzt.",
+                                   userId=userId,
+                                   status_text=status_text,
+                                   status_emoji=status_emoji)
         else:
             return render_template('install.html', error="true", error_text="(no access-token-2)")
     else:
