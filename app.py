@@ -51,11 +51,10 @@ def grant():
                 }
             url = 'https://slack.com/api/auth.test'
             r = requests.get(url, headers=header)
-            user = json.loads(r.text)['user_id']
             username = json.loads(r.text)['user']
 
 
-            return render_template('tryout.html', install_success="true", username=username, userId=user)
+            return render_template('tryout.html', install_success="true", username=username, userId=userId)
         else:
             return render_template('install.html', error="true", error_text="(no access-token-1)")
     else:
