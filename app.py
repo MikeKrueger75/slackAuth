@@ -33,6 +33,8 @@ def grant():
         pickle.dump(accessTokens, f)
         f.close()
         install = "true"
+    else
+        install = "false"
 
     if(userId):
         # Access-Token auslesen
