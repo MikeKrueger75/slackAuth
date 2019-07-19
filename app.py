@@ -76,20 +76,22 @@ def setstate():
         except:
             print("FEHLER: Datei data.bin nicht gefunden.")
 
-    if (accessToken):
-        # User-Profile Status setzen
-        header = {
-            'Authorization': 'Bearer ' + accessToken,
-            'Content-type': 'application/json; charset=utf-8'
-        }
-        url = 'https://slack.com/api/users.profile.set'
-        data = {
-            "profile": {
-                "status_text": request.args.get('status_text'),
-                "status_emoji": request.args.get('status_emoji')
+        if (accessToken):
+            # User-Profile Status setzen
+            header = {
+                'Authorization': 'Bearer ' + accessToken,
+                'Content-type': 'application/json; charset=utf-8'
             }
-        }
-        r = requests.post(url=url, data=json.dumps(data), headers=header)
-        return accessToken + "</p> "+ r.text
+            url = 'https://slack.com/api/users.profile.set'
+            data = {
+                "profile": {
+                    "status_text": request.args.get('status_text'),
+                    "status_emoji": request.args.get('status_emoji')
+                }
+            }
+            r = requests.post(url=url, data=json.dumps(data), headers=header)
+            return accessToken + "</p> "+ r.text
+        else:
+            return render_template('install.html', error="true")
     else:
-        return "FEHLER: Es konnte kein Access_Token ermittelt werden."
+        return render_template('install.html', error="true")
