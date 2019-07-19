@@ -87,7 +87,7 @@ def setstate():
                 }
             }
             r = requests.post(url=url, data=json.dumps(data), headers=header)
-            return render_template('tryout.html', msg_type="success", msg_text="Der Status wurde erfolgreich gesetzt.", username=username, userId=userId)
+            return render_template('tryout.html', msg_type="success", msg_text="Der Status wurde erfolgreich gesetzt.", userId=userId)
         else:
             return render_template('install.html', error="true", error_text="(no access-token-2)")
     else:
