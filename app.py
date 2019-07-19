@@ -58,9 +58,9 @@ def grant():
         username = json.loads(r.text)['user']
 
 
-        return render_template('install_ready.html', userId=userId, username=username)
+        return render_template('tryout.html', install_success="true", username=username)
     else:
-        return render_template('install.html')
+        return render_template('install.html', error="true")
 
 @app.route('/setstate')
 def setstate():

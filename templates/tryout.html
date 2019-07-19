@@ -1,0 +1,8 @@
+{% extends "template.html" %}
+{% block body %}
+    {% if install_success = "true" %}
+        <div class="alert alert-success" role="alert">Cool, Slack wurde erfolgreich verbunden.</div>
+    {% endif %}
+
+    <a href=https://slack-auth.herokuapp.com/setstate?userid={{userId}}&status_text=Happy&status_emoji=:smile:>https://slack-auth.herokuapp.com/setstate?userid={{userId}}&status_text=Happy&status_emoji=:smile:</a>
+{% endblock %}
