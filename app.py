@@ -74,7 +74,7 @@ def setstate():
                 f.close()
                 accessToken = accessTokens[userId]
         except:
-            print("FEHLER: Datei data.bin nicht gefunden.")
+            return render_template('install.html', error="true")
 
         if (accessToken):
             # User-Profile Status setzen
