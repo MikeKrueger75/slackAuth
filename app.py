@@ -42,7 +42,7 @@ def grant():
                 f.close()
                 accessToken = accessTokens[userId]
         except:
-            return render_template('install.html', error="true")
+            return render_template('install.html', error="true", error_text="(Database not found)")
 
         if(accessToken):
             # User identifizieren
@@ -73,7 +73,7 @@ def setstate():
                 f.close()
                 accessToken = accessTokens[userId]
         except:
-            return render_template('install.html', error="true")
+            return render_template('install.html', error="true", error_text="(Database not found)")
 
         if (accessToken):
             # User-Profile Status setzen
