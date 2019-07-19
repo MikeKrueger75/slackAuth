@@ -73,7 +73,7 @@ def setstate():
                 f.close()
                 accessToken = accessTokens[userId]
         except Exception as e:
-            return render_template('install.html', error="true", error_text="(Database not found-2) "+e.message)
+            return render_template('install.html', error="true", error_text="(Database not found-2) "+str(e))
 
         if (accessToken):
             # User-Profile Status setzen
