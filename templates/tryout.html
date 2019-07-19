@@ -2,7 +2,7 @@
 {% block body %}
     {% if msg_type in "success" %}
         <div class="alert alert-success" role="alert">{{msg_text}}</div>
-    {% elsif msg_type in "danger"%}
+    {% elif msg_type in "danger"%}
         <div class="alert alert-danger" role="alert">{{msg_text}}</div>
     {% endif %}
 
