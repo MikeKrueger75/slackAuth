@@ -1,6 +1,6 @@
 {% extends "template.html" %}
 {% block body %}
-    {% if install_success = "true" %}
+    {% if install_success in "true" %}
         <div class="alert alert-success" role="alert">Cool, Slack wurde erfolgreich verbunden.</div>
     {% endif %}
 
