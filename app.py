@@ -53,7 +53,7 @@ def grant():
             username = json.loads(r.text)['user']
 
 
-            return render_template('tryout.html', success="true", success_msg="Slack wurde für "+username+" verbunden.", userId=userId)
+            return render_template('tryout.html', msg_type="success", msg_text="Slack wurde für "+username+" verbunden.", userId=userId)
         else:
             return render_template('install.html', error="true", error_text="(no access-token-1)")
     else:
