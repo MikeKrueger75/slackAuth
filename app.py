@@ -59,7 +59,7 @@ def grant():
     else:
         return render_template('install.html', error="true", error_text="(no user-id-1)")
 
-@app.route('/setstate')
+@app.route('/setstate', methods=['get', 'post'])
 def setstate():
     userId = request.args.get('userid')
 
