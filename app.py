@@ -72,8 +72,8 @@ def setstate():
                 accessTokens = pickle.load(f)
                 f.close()
                 accessToken = accessTokens[userId]
-        except:
-            return render_template('install.html', error="true", error_text="(Database not found-2)")
+        except Exception as e:
+            return render_template('install.html', error="true", error_text="(Database not found-2) "+e.message)
 
         if (accessToken):
             # User-Profile Status setzen
