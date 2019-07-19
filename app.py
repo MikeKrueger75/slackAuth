@@ -60,7 +60,7 @@ def grant():
                                        userId=userId,
                                        status_text="Im Urlaub",
                                        status_emoji=":smile:")
-            else
+            else:
                 return render_template('tryout.html', msg_type="none",
                                        msg_text="",
                                        userId=userId,
