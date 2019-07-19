@@ -6,7 +6,7 @@
         <div class="alert alert-danger" role="alert">{{msg_text}}</div>
     {% endif %}
 
-    <form action="/" method="get">
+    <form action="/setState" method="get">
      https://slack-auth.herokuapp.com/setstate?<br>
         <table>
             <tr>
@@ -16,12 +16,12 @@
             </tr>
             <tr>
                 <td>
-                    status_text=<input type="text" name="status_text" value="I'm happy">
+                    status_text=<input type="text" name="status_text" value="Im Meeting">
                 </td>
             </tr>
             <tr>
                 <td>
-                    status_emoji=<input type="text" name="status_emoji" value=":smile:">
+                    status_emoji=<input type="text" name="status_emoji" value="">
                 </td>
             </tr>
         </table>
