@@ -33,7 +33,7 @@ def grant():
         pickle.dump(accessTokens, f)
         f.close()
         install = "true"
-    else
+    else:
         install = "false"
 
     if(userId):
