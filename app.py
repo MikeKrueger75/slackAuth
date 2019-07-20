@@ -14,8 +14,7 @@ def grant():
     #Access-Tokens Lesen
     accessTokens = {}
     install = "false"
-    userId = "29235f2fe8e4a08b1201"
-    #userId = request.args.get('userid')
+    userId = request.args.get('userid')
 
     code = request.args.get('code')
     if(code):
@@ -37,15 +36,14 @@ def grant():
 
     if(userId):
         # Access-Token auslesen
-        accessToken = "xoxp-14917766709-27108413296-691750518725-5592c0b6550e29235f2fe8e4a08b1201"
-        # try:
-        #     with open("data.bin", "rb") as f:
-        #         accessTokens = pickle.load(f)
-        #         f.close()
-        #         accessToken = accessTokens[userId]
-        #
-        # except:
-        #     return render_template('install.html', error="true", error_text="(could not load access-token-1)")
+        try:
+            with open("data.bin", "rb") as f:
+                accessTokens = pickle.load(f)
+                f.close()
+                accessToken = accessTokens[userId]
+
+        except:
+            return render_template('install.html', error="true", error_text="(could not load access-token-1)")
 
         if(accessToken):
             # User identifizieren
@@ -77,19 +75,17 @@ def grant():
 
 @app.route('/setstate')
 def setstate():
-    userId = "29235f2fe8e4a08b1201"
-    #userId = request.args.get('userid')
+    userId = request.args.get('userid')
 
     if (userId):
         # Access-Token auslesen
-        accessToken = "xoxp-14917766709-27108413296-691750518725-5592c0b6550e29235f2fe8e4a08b1201"
-        # try:
-        #     with open("data.bin", "rb") as f:
-        #         accessTokens = pickle.load(f)
-        #         f.close()
-        #         accessToken = accessTokens[userId]
-        # except:
-        #     return render_template('install.html', error="true", error_text="(could not load access-token-2)")
+        try:
+            with open("data.bin", "rb") as f:
+                accessTokens = pickle.load(f)
+                f.close()
+                accessToken = accessTokens[userId]
+        except:
+            return render_template('install.html', error="true", error_text="(could not load access-token-2)")
 
         if (accessToken):
             # User-Profile Status setzen

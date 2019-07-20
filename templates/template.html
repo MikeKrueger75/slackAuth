@@ -8,13 +8,31 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Slack-SetState</title>
+    <style type="text/css">
+          body
+          .vcenter {
+              display: inline-block;
+              position: absolute;
+              width:300px;
 
+              left: 50%;
+              margin-left: -150px;
+              padding: 10px;
+            }
+
+    </style>
   </head>
   <body>
-    <div class="container" v-align="center" max-width="200px">
-    {% block body %}
+    <div class="container center vcenter">
+      <div class="center">
+        <div class="row">
+          <div class="col-xs-6 center">
+              {% block body %}
 
-    {% endblock %}
+              {% endblock %}
+          </div>
+        </div>
+      </div>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

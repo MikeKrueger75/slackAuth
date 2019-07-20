@@ -7,41 +7,24 @@
     {% endif %}
 
     <form action="/setstate" method="get">
-     https://slack-auth.herokuapp.com/setstate?<br>
-        <table>
-            <tr>
-                <td>
-                    userid=
-                </td>
-                <td>
-                    <input type="text" name="userid" value={{userId}} readonly>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    status_text=
-                </td>
-                <td>
-                    <input type="text" name="status_text" value={{status_text}}>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    status_emoji=
-                </td>
-                <td>
-                    <input type="text" name="status_emoji" value={{status_emoji}}>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="Status setzen">
-                </td>
-                <td>
-                </td>
-            </tr>
-
-        </table>
-   </form>
-    <a href=https://slack-auth.herokuapp.com/setstate?userid={{userId}}&status_text={{status_text}}&status_emoji={{status_emoji}}>https://slack-auth.herokuapp.com/setstate?userid={{userId}}&status_text={{status_text}}&status_emoji={{status_emoji}}</a>
+        <samp>https://slack-auth.herokuapp.com/setstate</samp>
+        <div class="form-group">
+            <label for="userid"><samp>?userId=</samp></label>
+            <input class="form-control" type="text" id="userid" name="userid" value={{userId}} readonly>
+        </div>
+        <div class="form-group">
+            <label for="status_text"><samp>&status_text=</samp></label>
+            <input class="form-control" type="text" id="status_text" name="status_text" value={{status_text}} placeholder="Slack-Status">
+        </div>
+        <div class="form-group">
+            <label for="status_emoji"><samp>&status_emoji=</samp></label>
+            <input class="form-control" type="text" id="status_emoji" name="status_text" value={{status_emoji}} placeholder=":smile:">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Status setzen</button>
+    </form>
+</br>
+    <a class="btn btn-default btn-block" role="button" href="https://slack.com/oauth/authorize?scope=users.profile:read users.profile:write emoji:read&client_id=14917766709.693327534246&redirect_uri=https://slack-auth.herokuapp.com/grant" target="_self">
+      Slack neu verbinden
+    </a>
+<!--<a href=https://slack-auth.herokuapp.com/setstate?userid={{userId}}&status_text={{status_text}}&status_emoji={{status_emoji}}>https://slack-auth.herokuapp.com/setstate?userid={{userId}}&status_text={{status_text}}&status_emoji={{status_emoji}}</a>//-->
 {% endblock %}
