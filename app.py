@@ -55,13 +55,12 @@ def grant():
             username = json.loads(r.text)['user']
 
             if(install == "true"):
-                return accessToken + " _ " + userId
-                # return render_template('tryout.html',
-                #                        msg_type="success",
-                #                        msg_text="Slack wurde für "+username+" verbunden.",
-                #                        userId=userId,
-                #                        status_text="Im Urlaub",
-                #                        status_emoji=":smile:")
+                return render_template('tryout.html',
+                                       msg_type="success",
+                                       msg_text="Slack wurde für "+username+" verbunden.",
+                                       userId=userId,
+                                       status_text="Im Urlaub",
+                                       status_emoji=":smile:")
             else:
                 return render_template('tryout.html', msg_type="none",
                                        msg_text="",
