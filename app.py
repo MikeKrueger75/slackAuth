@@ -57,7 +57,7 @@ def grant():
             if(install == "true"):
                 return render_template('tryout.html',
                                        msg_type="success",
-                                       msg_text="Slack wurde für "+username+" verbunden.",
+                                       msg_text="Slack wurde für <strong>"+username+"</strong> verbunden.",
                                        userId=userId,
                                        status_text="Im Urlaub",
                                        status_emoji=":smile:")
