@@ -114,7 +114,7 @@ def setstate():
             else:
                 return render_template('tryout.html',
                                        msg_type="danger",
-                                       msg_text="Der Status konnte nicht gesetzt werden.<br>"+json.loads(r.text)['error'],
+                                       msg_text="Der Status konnte nicht gesetzt werden. ("+json.loads(r.text)['error']+")",
                                        userId=userId,
                                        status_text=status_text,
                                        status_emoji=status_emoji)
