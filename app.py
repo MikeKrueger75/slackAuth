@@ -64,7 +64,7 @@ def grant():
                 return render_template('tryout.html', msg_type="none",
                                        msg_text="",
                                        userId=userId,
-                                       status_text="Im Urlaub",
+                                       status_text="Im+Urlaub",
                                        status_emoji=":smile:")
         else:
             return render_template('install.html', error="true", error_text="(no access-token-1)")
@@ -103,15 +103,21 @@ def setstate():
             }
             r = requests.post(url=url, data=json.dumps(data), headers=header)
 
-
-            #Todo: API Response auf Fehler prüfen
-
-            return render_template('tryout.html',
-                                   msg_type="success",
-                                   msg_text="Der Status wurde erfolgreich gesetzt.",
-                                   userId=userId,
-                                   status_text=status_text,
-                                   status_emoji=status_emoji)
+            ok = json.loads(r.text)['ok']
+            if (ok):
+                return render_template('tryout.html',
+                                       msg_type="success",
+                                       msg_text="Der Status wurde erfolgreich gesetzt.",
+                                       userId=userId,
+                                       status_text=status_text,
+                                       status_emoji=status_emoji)
+            else:
+                return render_template('tryout.html',
+                                       msg_type="danger",
+                                       msg_text="Der Status konnte nicht gesetzt werden.<br>"+json.loads(r.text)['error'],
+                                       userId=userId,
+                                       status_text=status_text,
+                                       status_emoji=status_emoji)
         else:
             return render_template('install.html', error="true", error_text="(no access-token-2)")
     else:
